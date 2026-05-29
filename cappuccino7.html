@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cappuccino7 — Mahaj Sala</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='60' font-family='Josefin Sans, sans-serif' font-size='32' font-weight='bold' text-anchor='middle' fill='%23FFFFFF'>CAP7</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #B8903A;
+    --gold-light: #D4AF6A;
+    --gold-pale: #F0E0B0;
+    --cream: #FAF6EF;
+    --dark: #1A1208;
+    --dark-mid: #2E1F0A;
+    --text-muted: #8C7A5A;
+    --white: #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(184,144,58,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(184,144,58,0.08) 0%, transparent 60%);
+  }
+
+  /* Decorative rings */
+  .hero-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(184,144,58,0.15);
+    animation: expand 8s ease-in-out infinite;
+  }
+  .hero-ring:nth-child(1) { width: 500px; height: 500px; animation-delay: 0s; }
+  .hero-ring:nth-child(2) { width: 700px; height: 700px; animation-delay: 1.5s; }
+  .hero-ring:nth-child(3) { width: 900px; height: 900px; animation-delay: 3s; }
+
+  @keyframes expand {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.04); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SVG Logo recreated */
+  .logo-svg {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 28px;
+    filter: drop-shadow(0 0 20px rgba(184,144,58,0.4));
+    animation: fadeUp 1.2s 0.2s ease both;
+    opacity: 0;
+  }
+
+  .hero-brand {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    font-size: clamp(2rem, 6vw, 3.8rem);
+    color: var(--gold-light);
+    text-transform: uppercase;
+    animation: fadeUp 1.2s 0.4s ease both;
+    opacity: 0;
+  }
+
+  .hero-brand span {
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  .hero-sub {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.6em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 8px;
+    animation: fadeUp 1.2s 0.6s ease both;
+    opacity: 0;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 30px auto;
+    animation: fadeUp 1.2s 0.8s ease both;
+    opacity: 0;
+  }
+
+  .hero-tagline {
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: rgba(240,224,176,0.7);
+    font-weight: 300;
+    animation: fadeUp 1.2s 1s ease both;
+    opacity: 0;
+    max-width: 500px;
+    line-height: 1.7;
+    text-align: center;
+    margin: 0 auto 120px;
+  }
+
+  .hero-scroll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 1.2s 1.4s ease both;
+    opacity: 0;
+    cursor: pointer;
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+  .hero-scroll:hover {
+    transform: translateY(-8px);
+    filter: drop-shadow(0 0 12px rgba(184,144,58,0.5));
+  }
+  .hero-scroll span {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.5em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    transition: color 0.4s ease;
+    font-weight: 400;
+  }
+  .hero-scroll:hover span {
+    color: var(--gold-light);
+  }
+  .scroll-line {
+    width: 2px;
+    height: 60px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    animation: scrollPulse 2.5s ease-in-out infinite;
+    transition: height 0.4s ease;
+  }
+  .hero-scroll:hover .scroll-line {
+    height: 75px;
+  }
+  @keyframes scrollPulse {
+    0% { opacity: 0.3; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(8px); }
+    100% { opacity: 0.3; transform: translateY(0); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 24px; }
+
+  .section-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--dark);
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .about { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .about-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    background: var(--dark-mid);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .about-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 70%, rgba(184,144,58,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(184,144,58,0.15) 0%, transparent 50%);
+  }
+
+  .coffee-art {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .coffee-art svg {
+    width: 55%;
+    opacity: 0.25;
+  }
+
+  .about-frame {
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(184,144,58,0.3);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .about-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-style: italic;
+    color: var(--gold-light);
+    line-height: 1.5;
+    position: absolute;
+    bottom: 40px;
+    left: 30px;
+    right: 30px;
+  }
+
+  .about-text p {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #5a4a30;
+    margin-top: 20px;
+  }
+
+  .about-address {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(184,144,58,0.25);
+  }
+
+  .about-address .label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .about-address p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-top: 0;
+  }
+
+  /* ── MENU ── */
+  .menu-section {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .menu-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(184,144,58,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .menu-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .menu-inner .section-title { color: var(--gold-pale); }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .menu-cat {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(184,144,58,0.12);
+    padding: 40px 32px;
+    transition: background 0.3s;
+  }
+
+  .menu-cat:hover {
+    background: rgba(184,144,58,0.06);
+  }
+
+  .menu-cat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--gold-light);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .menu-cat-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(184,144,58,0.2);
+  }
+
+  .menu-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .menu-item:last-child { border-bottom: none; }
+
+  .menu-item-name {
+    font-size: 0.95rem;
+    color: rgba(240,224,176,0.75);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+  }
+
+  /* ── AMBIANCE / GALLERY ── */
+  .gallery-section {
+    background: var(--cream);
+    padding: 100px 24px;
+  }
+
+  .gallery-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    gap: 12px;
+    margin-top: 60px;
+  }
+
+  .gcard {
+    background: var(--dark-mid);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gcard:nth-child(1) { grid-column: span 7; min-height: 340px; }
+  .gcard:nth-child(2) { grid-column: span 5; }
+  .gcard:nth-child(3) { grid-column: span 5; }
+  .gcard:nth-child(4) { grid-column: span 7; min-height: 280px; }
+
+  @media (max-width: 600px) {
+    .gcard { grid-column: span 12 !important; min-height: 200px !important; }
+  }
+
+  .gcard-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(46,31,10,0.85) 0%, rgba(184,144,58,0.2) 100%);
+  }
+
+  .gcard-label {
+    position: relative;
+    z-index: 1;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: rgba(240,224,176,0.85);
+    text-align: center;
+    padding: 20px;
+  }
+
+  .gcard-icon {
+    position: absolute;
+    opacity: 0.12;
+    width: 60%;
+  }
+
+  /* ── HOURS ── */
+  .hours-section {
+    background: var(--white);
+    padding: 100px 24px;
+  }
+
+  .hours-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hours-table {
+    margin-top: 50px;
+    border-top: 1px solid rgba(184,144,58,0.25);
+  }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(184,144,58,0.1);
+  }
+
+  .hours-day {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--dark);
+    font-weight: 300;
+  }
+
+  .hours-dots {
+    flex: 1;
+    border-bottom: 1px dotted rgba(184,144,58,0.3);
+    margin: 0 20px;
+    position: relative;
+    top: -2px;
+  }
+
+  .hours-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--gold);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 60px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 300px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .footer-logo-text {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    letter-spacing: 0.4em;
+    font-size: 1.4rem;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-top: 24px;
+  }
+
+  .footer-sub {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.5em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .footer-address {
+    font-size: 0.9rem;
+    color: rgba(140,122,90,0.7);
+    margin-top: 24px;
+    line-height: 1.8;
+  }
+
+  .footer-copy {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: rgba(140,122,90,0.4);
+    margin-top: 40px;
+    text-transform: uppercase;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+
+  <div class="hero-content">
+    <!-- Cappuccino7 logo -->
+    <img src="logo.png" alt="Cappuccino7 Logo" class="logo-svg">
+
+    <div class="hero-brand">Cappuccino<span>7</span></div>
+    <div class="hero-sub">Mahaj Sala</div>
+    <div class="hero-divider"></div>
+    <div class="hero-tagline">L'art du café, l'âme d'un lieu</div>
+  </div>
+
+  <a class="hero-scroll" href="#about">
+    <span>Découvrir</span>
+    <div class="scroll-line"></div>
+  </a>
+</section>
+
+<!-- ABOUT -->
+<div style="background: var(--white); padding: 100px 24px;" id="about">
+<div class="about reveal">
+  <div class="about-visual">
+    <div class="coffee-art">
+      <img src="logo.png" alt="Cappuccino7 Logo" style="width: 60%; height: auto; opacity: 0.9;">
+    </div>
+    <div class="about-frame"></div>
+    <div class="about-quote">"Chaque tasse,<br>une invitation"</div>
+  </div>
+
+  <div class="about-text">
+    <div class="section-label">Notre Histoire</div>
+    <div class="section-title">Un café <em>d'exception</em><br>au cœur de Sala Jadida</div>
+    <p>Cappuccino7 est né d'une passion profonde pour l'art du café. Dans notre salon chaleureux de Sala Jadida, nous vous invitons à ralentir, à savourer, à vous reconnecter avec l'essentiel.</p>
+    <p>Chaque grain est sélectionné avec soin. Chaque préparation est un geste artisanal. Du cappuccino classique aux créations originales, nous vous offrons une expérience sensorielle unique.</p>
+
+    <div class="about-address">
+      <div class="label">Adresse</div>
+      <p>Bd Moulay Rachid, Résidence El Mander El Jamil<br>Sala Jadida, Maroc</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- MENU -->
+<section class="menu-section">
+  <div class="menu-inner reveal">
+    <div class="section-label">Carte</div>
+    <div class="section-title" style="color: var(--gold-pale);">Nos <em>Spécialités</em></div>
+
+    <div class="menu-grid">
+
+      <div class="menu-cat">
+        <div class="menu-cat-title">☕ Cafés Chauds</div>
+        <div class="menu-item"><span class="menu-item-name">Cappuccino</span></div>
+        <div class="menu-item"><span class="menu-item-name">Café Latté</span></div>
+        <div class="menu-item"><span class="menu-item-name">Espresso Double</span></div>
+        <div class="menu-item"><span class="menu-item-name">Americano</span></div>
+        <div class="menu-item"><span class="menu-item-name">Mocha</span></div>
+        <div class="menu-item"><span class="menu-item-name">Macchiato</span></div>
+      </div>
+
+      <div class="menu-cat">
+        <div class="menu-cat-title">🧊 Boissons Froides</div>
+        <div class="menu-item"><span class="menu-item-name">Iced Latte</span></div>
+        <div class="menu-item"><span class="menu-item-name">Frappuccino Maison</span></div>
+        <div class="menu-item"><span class="menu-item-name">Cold Brew</span></div>
+        <div class="menu-item"><span class="menu-item-name">Milkshake Caramel</span></div>
+        <div class="menu-item"><span class="menu-item-name">Limonade Menthe</span></div>
+        <div class="menu-item"><span class="menu-item-name">Jus Frais du Jour</span></div>
+      </div>
+
+      <div class="menu-cat">
+        <div class="menu-cat-title">🥐 Pâtisseries</div>
+        <div class="menu-item"><span class="menu-item-name">Croissant Beurre</span></div>
+        <div class="menu-item"><span class="menu-item-name">Pain au Chocolat</span></div>
+        <div class="menu-item"><span class="menu-item-name">Cheesecake Maison</span></div>
+        <div class="menu-item"><span class="menu-item-name">Brownie Fondant</span></div>
+        <div class="menu-item"><span class="menu-item-name">Crêpe Nutella</span></div>
+        <div class="menu-item"><span class="menu-item-name">Gaufre Maison</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY / AMBIANCE -->
+<section class="gallery-section">
+  <div class="gallery-inner reveal">
+    <div class="section-label">L'Ambiance</div>
+    <div class="section-title">Un cadre <em>raffiné</em><br>pour chaque moment</div>
+
+    <div class="gallery-grid">
+      <div class="gcard">
+        <div class="gcard-overlay"></div>
+        <svg class="gcard-icon" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="45" stroke="#B8903A" stroke-width="1.5"/>
+          <circle cx="50" cy="50" r="30" stroke="#B8903A" stroke-width="1"/>
+          <circle cx="50" cy="50" r="15" fill="#B8903A" opacity="0.4"/>
+        </svg>
+        <div class="gcard-label">Latte Art<br><small style="font-size:0.75rem;opacity:0.6">Chaque tasse est une œuvre</small></div>
+      </div>
+
+      <div class="gcard">
+        <div class="gcard-overlay" style="background: linear-gradient(135deg, rgba(26,18,8,0.9) 0%, rgba(184,144,58,0.15) 100%);"></div>
+        <div class="gcard-label">Espace Cosy<br><small style="font-size:0.75rem;opacity:0.6">Pour se retrouver</small></div>
+      </div>
+
+      <div class="gcard">
+        <div class="gcard-overlay" style="background: linear-gradient(135deg, rgba(184,144,58,0.15) 0%, rgba(26,18,8,0.9) 100%);"></div>
+        <div class="gcard-label">Pâtisseries Artisanales<br><small style="font-size:0.75rem;opacity:0.6">Faites maison</small></div>
+      </div>
+
+      <div class="gcard">
+        <div class="gcard-overlay"></div>
+        <svg class="gcard-icon" viewBox="0 0 100 100" fill="none" style="opacity:0.1">
+          <path d="M50 10 L90 90 L10 90 Z" stroke="#B8903A" stroke-width="1.5"/>
+          <path d="M50 30 L75 80 L25 80 Z" stroke="#B8903A" stroke-width="1"/>
+        </svg>
+        <div class="gcard-label">Instants Précieux<br><small style="font-size:0.75rem;opacity:0.6">Sala Jadida vous accueille</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section class="hours-section">
+  <div class="hours-inner reveal">
+    <div class="section-label">Horaires</div>
+    <div class="section-title">Nous vous<br>accueillons <em>chaque jour</em></div>
+
+    <div class="hours-table">
+      <div class="hours-row">
+        <span class="hours-day">Lundi — Vendredi</span>
+        <div class="hours-dots"></div>
+        <span class="hours-time">08:00 — 22:00</span>
+      </div>
+      <div class="hours-row">
+        <span class="hours-day">Samedi</span>
+        <div class="hours-dots"></div>
+        <span class="hours-time">09:00 — 23:00</span>
+      </div>
+      <div class="hours-row">
+        <span class="hours-day">Dimanche</span>
+        <div class="hours-dots"></div>
+        <span class="hours-time">10:00 — 22:00</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="logo.png" alt="Cappuccino7 Logo" style="width: 50px; height: 50px; opacity: 0.8;">
+
+  <div class="footer-logo-text">Cappuccino7</div>
+  <div class="footer-sub">Mahaj Sala</div>
+  <div class="footer-address">
+    Bd Moulay Rachid, Résidence El Mander El Jamil<br>
+    Sala Jadida, Maroc
+  </div>
+  <div class="footer-copy">© 2024 Cappuccino7 — Tous droits réservés</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
